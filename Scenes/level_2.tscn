@@ -1,0 +1,359 @@
+[gd_scene format=3 uid="uid://bx2lv3l2ndlv1"]
+
+[ext_resource type="PackedScene" uid="uid://cf0w0skqs3k64" path="res://Scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://bpbjc2oxm2mpf" path="res://Scripts/DeadZone.gd" id="4_deadzone"]
+[ext_resource type="PackedScene" uid="uid://bk5n0tn4k1l0c" path="res://Scenes/Coin.tscn" id="5_coin"]
+[ext_resource type="Script" uid="uid://dxc4cdl3tsvrj" path="res://Scripts/GameManager.gd" id="6_gamemanager"]
+[ext_resource type="Texture2D" uid="uid://cnbbny7qjh2xn" path="res://Assets/Textures/coin.png" id="7_cointex"]
+[ext_resource type="Script" uid="uid://bblncv7qj864l" path="res://Scripts/GameUI.gd" id="8_gameui"]
+[ext_resource type="PackedScene" uid="uid://8eqnv040i23x" path="res://Scenes/Door.tscn" id="9_door"]
+[ext_resource type="PackedScene" uid="uid://df8onnsakex81" path="res://Scenes/Trap.tscn" id="10_trap"]
+[ext_resource type="Script" uid="uid://chsmjsjvpmkuh" path="res://Scripts/LevelReset.gd" id="11_levelreset"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform1.tscn" id="20_bp1"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform2.tscn" id="21_bp2"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform3.tscn" id="22_bp3"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform4.tscn" id="23_bp4"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform5.tscn" id="24_bp5"]
+[ext_resource type="PackedScene" uid="uid://mmsi3fncun6x" path="res://Scenes/City/BuildingPlatform6.tscn" id="25_bp6"]
+[ext_resource type="PackedScene" path="res://Scenes/City/BuildingPlatform7.tscn" id="26_bp7"]
+[ext_resource type="PackedScene" uid="uid://bdhrnm05y12pf" path="res://Assets/Models/City/Dumpster.glb" id="30_dumpster"]
+[ext_resource type="PackedScene" uid="uid://b6yq7dwknptlb" path="res://Assets/Models/City/FireHydrant.glb" id="31_hydrant"]
+[ext_resource type="PackedScene" uid="uid://do3nrdwnh7xag" path="res://Assets/Models/City/Bush.glb" id="32_bush"]
+[ext_resource type="PackedScene" uid="uid://dk3hratkv6jc0" path="res://Assets/Models/City/Bench.glb" id="33_bench"]
+[ext_resource type="PackedScene" uid="uid://ddydkeb26tfj6" path="res://Assets/Models/City/Rocks.glb" id="34_rocks"]
+[ext_resource type="PackedScene" uid="uid://lu1pjjw1pqeq" path="res://Assets/Models/City/Streetlight.glb" id="35_light"]
+[ext_resource type="PackedScene" uid="uid://bjdwpxnviek5b" path="res://Assets/Models/City/Watertower.glb" id="36_watertower"]
+[ext_resource type="PackedScene" uid="uid://cv4ynefb0xi6o" path="res://Assets/Models/City/TrafficLight.glb" id="37_trafficlight"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Sky/Cloud.glb" id="40_cloud1"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Sky/Cloud2.glb" id="41_cloud2"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Sky/Cloud3.glb" id="42_cloud3"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Sky/Cloud4.glb" id="43_cloud4"]
+[ext_resource type="Script" path="res://Scripts/FloatingCloud.gd" id="44_floatcloud"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Sky/Star.glb" id="45_star"]
+[ext_resource type="Script" path="res://Scripts/GlowingStar.gd" id="46_glowstar"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lv2"]
+sky_top_color = Color(0.01961, 0.02745, 0.08627, 1)
+sky_horizon_color = Color(0.09804, 0.11373, 0.21961, 1)
+sky_curve = 0.15
+ground_bottom_color = Color(0.01569, 0.01961, 0.05098, 1)
+ground_horizon_color = Color(0.09804, 0.11373, 0.21961, 1)
+sun_angle_max = 2.0
+
+[sub_resource type="Sky" id="Sky_lv2"]
+sky_material = SubResource("ProceduralSkyMaterial_lv2")
+
+[sub_resource type="Environment" id="Environment_lv2"]
+background_mode = 2
+sky = SubResource("Sky_lv2")
+ambient_light_source = 3
+ambient_light_color = Color(0.223529, 0.262745, 0.407843, 1)
+ambient_light_energy = 0.455
+tonemap_mode = 2
+tonemap_exposure = 1.04
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+glow_intensity = 1.8
+glow_bloom = 0.15
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_saturation = 1.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_deadzone_lv2"]
+size = Vector3(80, 20, 80)
+
+[sub_resource type="SystemFont" id="SystemFont_lv2"]
+font_names = PackedStringArray("Star Choco")
+multichannel_signed_distance_field = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_lv2"]
+font = SubResource("SystemFont_lv2")
+font_size = 50
+font_color = Color(0.996094, 0.691406, 0.261719, 1)
+
+[node name="Level2" type="Node3D" unique_id=809519529]
+script = ExtResource("11_levelreset")
+
+[node name="Player" parent="." unique_id=778034499 instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9931, 0)
+
+[node name="Platforms" type="Node3D" parent="." unique_id=2101639615]
+
+[node name="BuildingPlatform1" parent="Platforms" unique_id=758328736 instance=ExtResource("20_bp1")]
+
+[node name="BuildingPlatform2" parent="Platforms" unique_id=2051325769 instance=ExtResource("21_bp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+
+[node name="BuildingPlatform4" parent="Platforms" unique_id=1501795283 instance=ExtResource("23_bp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -11)
+
+[node name="BuildingPlatform3" parent="Platforms" unique_id=462535001 instance=ExtResource("22_bp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -22)
+
+[node name="BuildingPlatform8" parent="Platforms" unique_id=1495551015 instance=ExtResource("22_bp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.317944, 1.5601463, -22.042646)
+
+[node name="BuildingPlatform5" parent="Platforms" unique_id=1634445577 instance=ExtResource("24_bp5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+visible = false
+
+[node name="BuildingPlatform6" parent="Platforms" unique_id=740095667 instance=ExtResource("25_bp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -33)
+visible = false
+
+[node name="BuildingPlatform7" parent="Platforms" unique_id=44388182 instance=ExtResource("26_bp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.975452, 0.16028118, -33.011326)
+
+[node name="BuildingPlatform9" parent="Platforms" unique_id=1332771429 instance=ExtResource("26_bp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.344645, -0.6066766, -32.96704)
+
+[node name="Decorations" type="Node3D" parent="." unique_id=163530505]
+
+[node name="Dumpster1" parent="Decorations" unique_id=1728400271 instance=ExtResource("30_dumpster")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 1, 3.814, -10)
+
+[node name="FireHydrant1" parent="Decorations" unique_id=268508627 instance=ExtResource("31_hydrant")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, -1, 3.814, -12)
+
+[node name="Bush1" parent="Decorations" unique_id=1439171307 instance=ExtResource("32_bush")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 7.7, 4.8327, -9.7)
+
+[node name="Bench1" parent="Decorations" unique_id=626525349 instance=ExtResource("33_bench")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 10.3, 6.3431, -23)
+
+[node name="Rocks1" parent="Decorations" unique_id=750581057 instance=ExtResource("34_rocks")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 7.7, 6.3431, -21)
+
+[node name="Streetlight1" parent="Decorations" unique_id=2099221338 instance=ExtResource("35_light")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 19.5, 7.8327, -23.3)
+
+[node name="StreetlightGlow1" type="OmniLight3D" parent="Decorations/Streetlight1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+light_color = Color(1, 0.788235, 0.470588, 1)
+light_energy = 3.0
+omni_range = 9.0
+shadow_enabled = true
+
+[node name="Bush2" parent="Decorations" unique_id=181910488 instance=ExtResource("32_bush")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 16.5, 7.8327, -20.7)
+
+[node name="Watertower1" parent="Decorations" unique_id=78369825 instance=ExtResource("36_watertower")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 19.5, 8.8311, -31.5)
+
+[node name="TrafficLight1" parent="Decorations" unique_id=381061036 instance=ExtResource("37_trafficlight")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 16.5, 8.8311, -34.5)
+
+[node name="TrafficLightGlow1" type="OmniLight3D" parent="Decorations/TrafficLight1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+light_color = Color(1, 0.937255, 0.756863, 1)
+light_energy = 2.0
+omni_range = 6.0
+shadow_enabled = true
+
+[node name="Bush3" parent="Decorations" unique_id=1987267813 instance=ExtResource("32_bush")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 25.2, 9.4807, -31.5)
+
+[node name="Rocks2" parent="Decorations" unique_id=21458094 instance=ExtResource("34_rocks")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 28.8, 9.4807, -34.5)
+
+[node name="Streetlight2" parent="Decorations" unique_id=2099221339 instance=ExtResource("35_light")]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, -2, 3.343, -1.5)
+
+[node name="StreetlightGlow2" type="OmniLight3D" parent="Decorations/Streetlight2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+light_color = Color(1, 0.788235, 0.470588, 1)
+light_energy = 3.0
+omni_range = 9.0
+shadow_enabled = true
+
+[node name="SkyClouds" type="Node3D" parent="." unique_id=555000101]
+
+[node name="Cloud1" parent="SkyClouds" unique_id=555000102 instance=ExtResource("40_cloud1")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -10, 16, -10)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(5, 0.8, 3)
+move_speed = 0.12
+
+[node name="Cloud2" parent="SkyClouds" unique_id=555000103 instance=ExtResource("41_cloud2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 12, 20, -45)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(7, 1, 4)
+move_speed = 0.09
+
+[node name="Cloud3" parent="SkyClouds" unique_id=555000104 instance=ExtResource("42_cloud3")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 32, 14, -20)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(4, 0.6, 5)
+move_speed = 0.16
+
+[node name="Cloud4" parent="SkyClouds" unique_id=555000105 instance=ExtResource("43_cloud4")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 5, 24, 8)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(6, 1.2, 6)
+move_speed = 0.1
+
+[node name="Cloud5" parent="SkyClouds" unique_id=555000106 instance=ExtResource("40_cloud1")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 30, 22, -38)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(5, 0.7, 3)
+move_speed = 0.13
+
+[node name="Cloud6" parent="SkyClouds" unique_id=555000107 instance=ExtResource("41_cloud2")]
+transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -14, 12, -28)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(6, 0.9, 4)
+move_speed = 0.11
+
+[node name="Cloud7" parent="SkyClouds" unique_id=555000108 instance=ExtResource("42_cloud3")]
+transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 5, 26, -50)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(8, 1, 5)
+move_speed = 0.08
+
+[node name="Cloud8" parent="SkyClouds" unique_id=555000109 instance=ExtResource("43_cloud4")]
+transform = Transform3D(3.2, 0, 0, 0, 3.2, 0, 0, 0, 3.2, 36, 18, -5)
+script = ExtResource("44_floatcloud")
+move_distance = Vector3(5, 0.8, 4)
+move_speed = 0.14
+
+[node name="Stars" type="Node3D" parent="." unique_id=555000201]
+
+[node name="Star1" parent="Stars" unique_id=555000202 instance=ExtResource("45_star")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -6, 13, -8)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star1"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.2
+omni_range = 14.0
+
+[node name="Star2" parent="Stars" unique_id=555000203 instance=ExtResource("45_star")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 14, 17, -15)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star2"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.0
+omni_range = 13.0
+
+[node name="Star3" parent="Stars" unique_id=555000204 instance=ExtResource("45_star")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4, 15, -22)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star3"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.3
+omni_range = 15.0
+
+[node name="Star4" parent="Stars" unique_id=555000205 instance=ExtResource("45_star")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 22, 14, -30)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star4"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.1
+omni_range = 13.0
+
+[node name="Star5" parent="Stars" unique_id=555000206 instance=ExtResource("45_star")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 10, 19, -38)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star5"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.2
+omni_range = 14.0
+
+[node name="Star6" parent="Stars" unique_id=555000207 instance=ExtResource("45_star")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 28, 18, -12)
+script = ExtResource("46_glowstar")
+
+[node name="StarLight" type="OmniLight3D" parent="Stars/Star6"]
+light_color = Color(1, 0.972549, 0.803922, 1)
+light_energy = 2.1
+omni_range = 13.0
+
+[node name="Environment" type="Node3D" parent="." unique_id=713432151]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=223562204]
+environment = SubResource("Environment_lv2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=496605943]
+transform = Transform3D(-0.898603, 0.438763, 2.98254e-08, 0.146657, 0.300359, 0.942484, 0.413527, 0.846919, -0.334251, 20, 20, -10)
+light_color = Color(0.65098, 0.71373, 0.90196, 1)
+light_energy = 0.455
+shadow_enabled = true
+
+[node name="Extras" type="Node3D" parent="." unique_id=785874823]
+
+[node name="SpawnPosition" type="Marker3D" parent="Extras" unique_id=1559130502]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9931, 0)
+
+[node name="Coins" type="Node3D" parent="." unique_id=1620808254]
+
+[node name="Coin1" parent="Coins" unique_id=2086942202 instance=ExtResource("5_coin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.564, -11)
+
+[node name="Coin2" parent="Coins" unique_id=34263726 instance=ExtResource("5_coin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5.5827, -11)
+
+[node name="Coin3" parent="Coins" unique_id=1918676760 instance=ExtResource("5_coin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 7.0931, -22)
+
+[node name="Coin4" parent="Coins" unique_id=1735097014 instance=ExtResource("5_coin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 8.5827, -22)
+
+[node name="GameManager" type="Node3D" parent="." unique_id=840814159]
+script = ExtResource("6_gamemanager")
+
+[node name="DeadZone" type="Area3D" parent="." unique_id=565728616]
+script = ExtResource("4_deadzone")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeadZone" unique_id=961808250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, -16)
+shape = SubResource("BoxShape3D_deadzone_lv2")
+
+[node name="Trap" parent="." unique_id=85350831 instance=ExtResource("10_trap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5.1897, -11)
+trap_mode = "reset_and_lose_item"
+
+[node name="Door" parent="." unique_id=1150751451 instance=ExtResource("9_door")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 9.5307, -33)
+required_items = 4
+next_scene_path = ""
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=1883467111]
+
+[node name="GameUI" type="Control" parent="UserInterface" unique_id=282331596]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_gameui")
+
+[node name="CoinTexture" type="TextureRect" parent="UserInterface/GameUI" unique_id=1220189810]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 31.0
+offset_right = 122.0
+offset_bottom = 121.0
+texture = ExtResource("7_cointex")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CoinsLabel" type="Label" parent="UserInterface/GameUI" unique_id=622201420]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 50.0
+offset_right = 193.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0.996094, 0.710938, 0.261719, 1)
+theme_override_colors/font_outline_color = Color(0.644531, 0.410156, 0.1875, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = SubResource("SystemFont_lv2")
+theme_override_font_sizes/font_size = 48
+text = "X 0"
+label_settings = SubResource("LabelSettings_lv2")
+
+[connection signal="body_entered" from="DeadZone" to="DeadZone" method="_on_body_entered"]

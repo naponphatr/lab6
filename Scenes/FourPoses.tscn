@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" uid="uid://0fsvtfkxoglw" path="res://cat/Rumba Dancing.fbx" id="1_char"]
+[ext_resource type="Script" path="res://Scripts/CharacterPose.gd" id="2_script"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.45, 0.55, 0.65, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(14, 6)
+
+[sub_resource type="StandardMaterial3D" id="Ground_Mat"]
+albedo_color = Color(0.35, 0.4, 0.32, 1)
+
+[node name="FourPoses" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7071, 0.7071, 0, -0.7071, 0.7071, 0, 5, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9848, -0.1736, 0, 0.1736, 0.9848, 0, 2.5, 9)
+current = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1")
+surface_material_override/0 = SubResource("Ground_Mat")
+
+[node name="Character_Stand" parent="." instance=ExtResource("1_char")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0)
+script = ExtResource("2_script")
+pose_keywords = "idle,stand,breath"
+thai_label = "ยืน"
+use_default_library_as_fallback = false
+
+[node name="PoseLabel" type="Label3D" parent="Character_Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+outline_size = 12
+font_size = 44
+text = "ยืน"
+
+[node name="Character_Dance" parent="." instance=ExtResource("1_char")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+script = ExtResource("2_script")
+pose_keywords = "dance,rumba"
+thai_label = "เต้น"
+use_default_library_as_fallback = true
+
+[node name="PoseLabel" type="Label3D" parent="Character_Dance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+outline_size = 12
+font_size = 44
+text = "เต้น"
+
+[node name="Character_Run" parent="." instance=ExtResource("1_char")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+script = ExtResource("2_script")
+pose_keywords = "run,sprint,jog"
+thai_label = "วิ่ง"
+use_default_library_as_fallback = false
+
+[node name="PoseLabel" type="Label3D" parent="Character_Run"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+outline_size = 12
+font_size = 44
+text = "วิ่ง"
+
+[node name="Character_Walk" parent="." instance=ExtResource("1_char")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0)
+script = ExtResource("2_script")
+pose_keywords = "walk,walking"
+thai_label = "เดิน"
+use_default_library_as_fallback = false
+
+[node name="PoseLabel" type="Label3D" parent="Character_Walk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+outline_size = 12
+font_size = 44
+text = "เดิน"

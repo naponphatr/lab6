@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Assets/Models/City/Building1.glb" id="1_bld"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bld"]
+size = Vector3(4.1129, 3.3931, 4.1129)
+
+[node name="BuildingPlatform1" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6966, 0)
+shape = SubResource("BoxShape3D_bld")
+
+[node name="Model" parent="." instance=ExtResource("1_bld")]
+transform = Transform3D(2.05643, 0, 0, 0, 2.05643, 0, 0, 0, 2.05643, 0, 0, 0)
+
+[node name="WindowGlow" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+light_color = Color(1, 0.85098, 0.552941, 1)
+light_energy = 1.0
+omni_range = 5.5

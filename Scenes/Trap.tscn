@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d7t4apk1trap01"]
+
+[ext_resource type="Script" path="res://Scripts/Trap.gd" id="1_trap01"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Props/BearTrap.glb" id="2_beartrap"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trap01"]
+size = Vector3(1, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trap01"]
+albedo_color = Color(0.858824, 0.184314, 0.184314, 0.6)
+transparency = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_trap01"]
+material = SubResource("StandardMaterial3D_trap01")
+size = Vector3(1, 0.2, 1)
+
+[node name="Trap" type="Area3D"]
+script = ExtResource("1_trap01")
+trap_mode = "reset_only"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_trap01")
+
+[node name="TrapMarker" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_trap01")
+
+[node name="BearTrapModel" parent="." instance=ExtResource("2_beartrap")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, -0.1, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
